@@ -6,8 +6,8 @@ An awesome Dock MobileSubstrate tweak!
 
 ### Features:
 - Add a magnifier effect to the stock dock
-- Swipe left/right to choose app
-- Swipe up to open
+- Swipe left/right to choose an app
+- Multiple gestures to open the app
 
 ## This tweak is incomplete. Compile at your own (minimized) risk.
 Once complete, the tweak will be available on [my repo](https://repo.keycap.one) and the [releases](https://github.com/singlekeycap/magnify/releases) tab.

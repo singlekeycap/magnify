@@ -5,17 +5,17 @@
 	<key>entry</key>
 	<dict>
 		<key>bundle</key>
-		<string>hidesuggestionsprefs</string>
+		<string>magnifyprefs</string>
 		<key>cell</key>
 		<string>PSLinkCell</string>
 		<key>detail</key>
-		<string>HSRootListController</string>
+		<string>MagRootListController</string>
 		<key>icon</key>
-		<string>images/HSIcon.png</string>
+		<string>images/MagIcon.png</string>
 		<key>isController</key>
 		<true/>
 		<key>label</key>
-		<string>HideSuggestions</string>
+		<string>Magnify</string>
 	</dict>
 </dict>
 </plist>

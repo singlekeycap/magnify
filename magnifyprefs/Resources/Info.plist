@@ -5,9 +5,9 @@
 	<key>CFBundleDevelopmentRegion</key>
 	<string>English</string>
 	<key>CFBundleExecutable</key>
-	<string>hidesuggestionsprefs</string>
+	<string>magnifyprefs</string>
 	<key>CFBundleIdentifier</key>
-	<string>one.keycap.hidesuggestionsprefs</string>
+	<string>one.keycap.magnify</string>
 	<key>CFBundleInfoDictionaryVersion</key>
 	<string>6.0</string>
 	<key>CFBundlePackageType</key>
@@ -19,6 +19,6 @@
 	<key>CFBundleVersion</key>
 	<string>1.0</string>
 	<key>NSPrincipalClass</key>
-	<string>HSRootListController</string>
+	<string>MagRootListController</string>
 </dict>
 </plist>

@@ -1,20 +1,13 @@
-#include "HSRootListController.h"
+#include "MagRootListController.h"
 
 NSUserDefaults *prefs;
 NSArray *rootPreferenceKeys;
 
-@implementation HSRootListController
+@implementation MagRootListController
 	-(id)init {
-		prefs = [[NSUserDefaults alloc] initWithSuiteName:@"one.keycap.hidesuggestionsprefs"];
+		prefs = [[NSUserDefaults alloc] initWithSuiteName:@"one.keycap.magnify"];
 		rootPreferenceKeys = @[
-			@"enableTweak",
-			@"hideSuggestions",
-			@"enableBackgroundColor",
-			@"backgroundColor",
-			@"enableCellColor",
-			@"cellColor",
-			@"enableSiriSuggestionsText",
-			@"siriSuggestionsText"
+			@"enableTweak"
 		];
 		return [super init];
 	}
@@ -44,10 +37,6 @@ NSArray *rootPreferenceKeys;
 
 	- (void) twtKeycap {
 		[[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"https://twitter.com/singlekeycap"] options:@{} completionHandler:nil];
-	}
-
-	- (void) twtSneethan {
-		[[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"https://twitter.com/realsneethan"] options:@{} completionHandler:nil];
 	}
 
 	- (void)viewWillAppear:(BOOL)animated {

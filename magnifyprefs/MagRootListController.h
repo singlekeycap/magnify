@@ -3,5 +3,5 @@
 #import <spawn.h>
 #import <rootless.h>
 
-@interface HSRootListController : PSListController
+@interface MagRootListController : PSListController
 @end
