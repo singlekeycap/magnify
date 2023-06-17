@@ -2,17 +2,20 @@
 
 NSUserDefaults *prefs;
 BOOL enableTweak;
+int maxIcons = 5;
 
 %group unlimitedDock
 
 %hook SBIconListGridLayoutConfiguration
-- (NSUInteger)numberOfPortraitColumns {
-    NSUInteger rows = MSHookIvar<NSUInteger>(self, "_numberOfPortraitRows");
-    if (rows == 1) {
-        return 16;
+
+- (unsigned long long)numberOfPortraitColumns {
+    unsigned long long o = %orig;
+    if ([self numberOfPortraitRows] == 1 && o == 4) {
+        return maxIcons;
     }
-    return %orig;
+    return o;
 }
+
 %end
 
 %end
