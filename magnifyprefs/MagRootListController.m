@@ -24,6 +24,7 @@ NSArray *rootPreferenceKeys;
 		const char* args[] = {"killall", "-9", "backboardd", NULL};
 		posix_spawn(&pid, ROOT_PATH("/usr/bin/killall"), NULL, NULL, (char* const*)args, NULL);
 	}
+
 	-(void)askBeforeRespring {
 		UIAlertController* alert = [UIAlertController alertControllerWithTitle:@"Are you sure you want to respring?" message:@"" preferredStyle:UIAlertControllerStyleAlert];
 		UIAlertAction* respringAction = [UIAlertAction actionWithTitle:@"Respring" style:UIAlertActionStyleDestructive handler:^(UIAlertAction *action) {

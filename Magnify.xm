@@ -2,17 +2,21 @@
 
 NSUserDefaults *prefs;
 BOOL enableTweak;
-int maxIcons = 6;
+int maxIcons = 12;
+int currentIcons = 5;
 
 %group unlimitedDock
 
 %hook SBIconListGridLayoutConfiguration
 
-- (NSUInteger)numberOfPortraitColumns {
+- (NSUInteger) numberOfPortraitColumns {
     NSUInteger o = %orig;
 
     if ([self numberOfPortraitRows] == 1) {
-        return maxIcons;
+        if (currentIcons > maxIcons) {
+            return maxIcons;
+        }
+        return currentIcons;
     }
     return o;
 }
@@ -20,18 +24,44 @@ int maxIcons = 6;
 %end
 
 %hook SBRootFolderDockIconListView
+
+// THIS IS BROKEN, SAFE MODES WHEN YOU ADD/REMOVE AN ICON TO THE DOCK
+- (NSUInteger) maximumIconCount {
+    if (currentIcons > maxIcons) {
+        return maxIcons;
+    }
+    return currentIcons;
+}
+
+- (void) iconList: (id)arg0 didAddIcon: (id) arg1 {
+    %orig;
+    if ((self.subviews.count + 1) == self.layout.layoutConfiguration.numberOfPortraitColumns) {
+        currentIcons = self.subviews.count + 2;
+    }
+}
+
+- (void) iconList: (id)arg0 didRemoveIcon: (id) arg1 {
+    %orig;
+    if ((self.subviews.count + 1) == self.layout.layoutConfiguration.numberOfPortraitColumns) {
+        currentIcons = self.subviews.count;
+    }
+}
+
 - (void) layoutSubviews {
     %orig;
     int dockWidth = self.superview.subviews[0].frame.size.width;
-    //int dockHeight = self.superview.subviews[0].frame.size.height;
-    //int index = 0;
+    int iconWidth = (dockWidth - ((dockWidth / 6.0) + ((dockWidth / 48.0) * [@(self.subviews.count) floatValue]))) / [@(self.subviews.count + 1) floatValue];
+    if (iconWidth > 60) {
+        iconWidth = 60;
+    }
 
     for (SBIconView *iconView in self.subviews) {
-        iconView.frame = CGRectMake(iconView.frame.origin.x, iconView.frame.origin.y, dockWidth * (1.0 / ((13.0/9.0) * self.subviews.count)), dockWidth * (1.0 / ((13.0/9.0) * self.subviews.count)));
-        iconView.bounds = CGRectMake(0, 0, dockWidth * (1.0 / ((13.0/9.0) * self.subviews.count)), dockWidth * (1.0 / ((13.0/9.0) * self.subviews.count)));
+        iconView.frame = CGRectMake(iconView.frame.origin.x, iconView.frame.origin.y, iconWidth, iconWidth);
+        iconView.bounds = CGRectMake(0, 0, iconWidth, iconWidth);
         iconView.location = @"Dock";
     }
 }
+
 %end
 
 %hook SBIconView
